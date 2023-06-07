@@ -1,13 +1,14 @@
 import React from "react";
-import Container from "../../components/shared/Container/Container";
+
+import Slider from "../../components/Slider/Slider";
+import SectionTitle from "../../components/SectionTitle/SectionTitle";
 
 const Home = () => {
   return (
-    <div>
-      <Container>
-        <h2 className="text-3xl font-bold">Home page.</h2>
-      </Container>
-    </div>
+    <>
+      <Slider></Slider>
+      <SectionTitle></SectionTitle>
+    </>
   );
 };
 

@@ -1,23 +1,53 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container/Container";
+import { FaUserCircle } from "react-icons/fa";
+import mainLogo from "../../assets/main-logo.png";
 
 const Navbar = () => {
+  const user = false;
   const navItem = (
     <>
-      <li>
-        <NavLink>Item 1</NavLink>
+      <li className="md:me-3">
+        <NavLink to="/">Home</NavLink>
       </li>
-      <li>
-        <NavLink>Item 2</NavLink>
+      <li className="md:me-3">
+        <NavLink to="/instructor">Instructor</NavLink>
       </li>
-      <li>
-        <NavLink>Item 3</NavLink>
+      <li className="md:me-3">
+        <NavLink to="/classes">Classes</NavLink>
       </li>
+      {user ? (
+        <>
+          <li className="md:me-3">
+            <Link to="/login">Logout</Link>
+          </li>
+        </>
+      ) : (
+        <>
+          <li className="md:me-3">
+            <Link to="/login">Login</Link>
+          </li>
+        </>
+      )}
+      {user && (
+        <>
+          <li className="md:me-3 order-first md:order-last">
+            <div className="avatar">
+              <div className="w-11 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <FaUserCircle
+                  className="w-full text-gray-400"
+                  size={46}
+                ></FaUserCircle>
+              </div>
+            </div>
+          </li>
+        </>
+      )}
     </>
   );
   return (
-    <div className=" shadow-md">
+    <div className=" shadow-md fixed z-10 w-full bg-black bg-opacity-30 text-white">
       <Container>
         {" "}
         <div className="drawer">
@@ -45,9 +75,18 @@ const Navbar = () => {
                   </svg>
                 </label>
               </div>
-              <div className="flex-1">Navbar Title</div>
+              <div className="flex-1">
+                <Link to="/">
+                  <div className="flex">
+                    <img src={mainLogo} alt="" />
+                    <span className="text-2xl font-bold bg-blue-600 p-1">
+                      MyDraw
+                    </span>
+                  </div>
+                </Link>
+              </div>
               <div className="flex-none hidden lg:block">
-                <ul className="menu menu-horizontal p-0">
+                <ul className="menu menu-horizontal p-0 items-center">
                   {/* Navbar menu content here */}
                   {navItem}
                 </ul>
@@ -58,7 +97,7 @@ const Navbar = () => {
           </div>
           <div className="drawer-side">
             <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-            <ul className="menu p-4 w-80 h-full bg-base-200">
+            <ul className="menu p-4 w-80 h-full bg-white ">
               {/* Sidebar content here */}
               {navItem}
             </ul>
