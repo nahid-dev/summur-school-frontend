@@ -7,7 +7,10 @@ const Home = () => {
   return (
     <>
       <Slider></Slider>
-      <SectionTitle></SectionTitle>
+      <SectionTitle
+        subTitle="Join the class you like"
+        title="Our Popular Classes"
+      ></SectionTitle>
     </>
   );
 };
