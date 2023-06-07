@@ -79,7 +79,7 @@ const Navbar = () => {
                 <Link to="/">
                   <div className="flex">
                     <img src={mainLogo} alt="" />
-                    <span className="text-2xl font-bold bg-blue-600 p-1">
+                    <span className="text-2xl font-light bg-blue-600 p-1 rounded-full px-3">
                       MyDraw
                     </span>
                   </div>
