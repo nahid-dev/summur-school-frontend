@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .main-btn {
-  @apply bg-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-500 transition duration-200;
+  @apply bg-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-500 transition duration-200 text-white cursor-pointer;
 }
