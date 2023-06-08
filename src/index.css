@@ -5,3 +5,9 @@
 .main-btn {
   @apply bg-blue-600 px-4 py-2 rounded-full font-semibold hover:bg-blue-500 transition duration-200 text-white cursor-pointer;
 }
+.second-btn {
+  @apply bg-transparent text-white  hover:bg-blue-600 transition duration-300 border border-blue-600 font-semibold text-center rounded-full md:mb-5 mb-2;
+}
+.third-btn {
+  @apply bg-white text-blue-600 font-bold p-3 md:text-base uppercase my-2 rounded-sm hover:-translate-y-2 transition duration-300 hover:bg-white;
+}

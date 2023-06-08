@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container/Container";
-import { FaUserCircle } from "react-icons/fa";
 import mainLogo from "../../assets/main-logo.png";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const Navbar = () => {
-  const user = false;
+  const { user, logOut } = useContext(AuthContext);
+
+  // User LogOut:
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const navItem = (
     <>
       <li className="md:me-3">
@@ -20,7 +30,9 @@ const Navbar = () => {
       {user ? (
         <>
           <li className="md:me-3">
-            <Link to="/login">Logout</Link>
+            <Link onClick={handleLogOut} to="/login">
+              Logout
+            </Link>
           </li>
         </>
       ) : (
@@ -32,13 +44,17 @@ const Navbar = () => {
       )}
       {user && (
         <>
+          <li className="md:me-3 ">
+            <NavLink to="/dashboard">Dashboard</NavLink>
+          </li>
+        </>
+      )}
+      {user && (
+        <>
           <li className="md:me-3 order-first md:order-last">
             <div className="avatar">
-              <div className="w-11 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                <FaUserCircle
-                  className="w-full text-gray-400"
-                  size={46}
-                ></FaUserCircle>
+              <div className="w-11 rounded-full ring ring-blue-600 ">
+                <img src={user?.photoURL} alt="" />
               </div>
             </div>
           </li>
