@@ -6,6 +6,10 @@ import Login from "../pages/Login/Login";
 import Dashboard from "../Layouts/Dashboard";
 import ManageUsers from "../components/ManageUsers/ManageUsers";
 import ManageClasses from "../components/ManageClasses/ManageClasses";
+import AddAClass from "../components/AddAClass/AddAClass";
+import MyClasses from "../components/MyClasses/MyClasses";
+import MySelectedClasses from "../components/MySelectedClasses/MySelectedClasses";
+import MyEnrolledClasses from "../components/MyEnrolledClasses/MyEnrolledClasses";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +41,22 @@ const router = createBrowserRouter([
       {
         path: "manageUsers",
         element: <ManageUsers></ManageUsers>,
+      },
+      {
+        path: "addAClass",
+        element: <AddAClass></AddAClass>,
+      },
+      {
+        path: "myClasses",
+        element: <MyClasses></MyClasses>,
+      },
+      {
+        path: "mySelectedClasses",
+        element: <MySelectedClasses></MySelectedClasses>,
+      },
+      {
+        path: "myEnrolledClasses",
+        element: <MyEnrolledClasses></MyEnrolledClasses>,
       },
     ],
   },
