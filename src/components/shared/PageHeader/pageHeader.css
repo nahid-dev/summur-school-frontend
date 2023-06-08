@@ -1,0 +1,5 @@
+.header-bg {
+  background-image: url("../../../assets/header-bg.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}

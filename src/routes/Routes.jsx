@@ -10,6 +10,8 @@ import AddAClass from "../components/AddAClass/AddAClass";
 import MyClasses from "../components/MyClasses/MyClasses";
 import MySelectedClasses from "../components/MySelectedClasses/MySelectedClasses";
 import MyEnrolledClasses from "../components/MyEnrolledClasses/MyEnrolledClasses";
+import Instructor from "../pages/Instractor/Instructor";
+import Classes from "../pages/Classes/Classes";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: "signUp",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "instructor",
+        element: <Instructor></Instructor>,
+      },
+      {
+        path: "classes",
+        element: <Classes></Classes>,
       },
     ],
   },

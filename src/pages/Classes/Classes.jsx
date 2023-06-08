@@ -1,12 +1,12 @@
 import React from "react";
 import PageHeader from "../../components/shared/PageHeader/PageHeader";
 
-const Instructor = () => {
+const Classes = () => {
   return (
     <div className="min-h-screen">
-      <PageHeader heading="Instructor"></PageHeader>
+      <PageHeader heading="Classes"></PageHeader>
     </div>
   );
 };
 
-export default Instructor;
+export default Classes;
