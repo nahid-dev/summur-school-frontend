@@ -1,22 +1,90 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "../../components/shared/Container/Container";
 import "./signUp.css";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
+
+const hosted_image_api_key = import.meta.env.VITE_IMG_HOST;
 
 const SignUp = () => {
+  const { createUser, updateUser } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
 
+  // hosting image url
+  const hosted_img_url = `https://api.imgbb.com/1/upload?key=${hosted_image_api_key}`;
+
   const onSubmit = (data) => {
     console.log(data);
+    const formData = new FormData();
+    formData.append("image", data.photo[0]);
+
+    fetch(hosted_img_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgResponse) => {
+        console.log(imgResponse);
+        if (imgResponse.success) {
+          const imageURL = imgResponse.data.display_url;
+          console.log(imageURL);
+          // create User================
+          createUser(data.email, data.password)
+            .then((result) => {
+              const signUpedUser = result.user;
+              console.log(signUpedUser);
+
+              // Update User ===============
+              updateUser(data.name, imageURL)
+                .then(() => {
+                  const saveUser = {
+                    name: data.name,
+                    email: data.email,
+                    user_image: imageURL,
+                  };
+                  fetch("http://localhost:5000/users", {
+                    method: "POST",
+                    headers: {
+                      "content-type": "application/json",
+                    },
+                    body: JSON.stringify(saveUser),
+                  })
+                    .then((res) => res.json())
+                    .then((data) => {
+                      if (data.insertedId) {
+                        Swal.fire({
+                          icon: "success",
+                          title: "Sign Up Successfully",
+                        });
+                        reset();
+                      }
+                    });
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                });
+            })
+            .catch((err) => {
+              console.log(err.message);
+            });
+        }
+      });
   };
   return (
     <div className="custom-bg">
+      <Helmet>
+        <title>MyDraw | Sign Up</title>
+      </Helmet>
       <Container>
         <div className="min-h-screen flex items-center justify-center py-20 pt-24">
           <div className=" bg-white shadow-md p-5 md:p-10 rounded-md md:w-2/6">
@@ -106,16 +174,19 @@ const SignUp = () => {
                   </p>
                 )}
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col mt-3">
                 <input className="main-btn " type="submit" value="Sign Up" />
               </div>
             </form>
             <div className="mt-2">
               <p>
                 Already have an account?{" "}
-                <Link className="underline text-blue-600">Login</Link>
+                <Link to="/login" className="underline text-blue-600">
+                  Login
+                </Link>
               </p>
             </div>
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </Container>

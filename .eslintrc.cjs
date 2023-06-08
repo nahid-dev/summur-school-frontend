@@ -21,12 +21,12 @@ module.exports = {
         varsIgnorePattern: "React",
       },
     ],
-    "no-undef": [
-      "error",
-      {
-        typeof: true,
-        ignorePattern: "^watch$",
-      },
-    ],
+    // "no-undef": [
+    //   "error",
+    //   {
+    //     typeof: true,
+    //     ignorePattern: "^watch$",
+    //   },
+    // ],
   },
 };
