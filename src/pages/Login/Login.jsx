@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Container from "../../components/shared/Container/Container";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -10,6 +10,7 @@ import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -28,6 +29,7 @@ const Login = () => {
           title: "Successfully Login",
         });
         reset();
+        navigate("/");
       })
       .catch((err) => {
         console.log(err.message);

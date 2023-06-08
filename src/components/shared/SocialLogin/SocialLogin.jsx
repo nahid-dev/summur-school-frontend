@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import googleIcon from "../../../assets/google.png";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   // google Login
   const handleGoogleLogin = () => {
@@ -31,6 +33,7 @@ const SocialLogin = () => {
               icon: "success",
               title: "Successfully Login",
             });
+            navigate("/");
           });
       })
       .catch((err) => console.log(err.message));
