@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import SectionTitle from "../SectionTitle/SectionTitle";
-import Loader from "../Loader/Loader";
 import Swal from "sweetalert2";
+import useUser from "../../Hooks/useUser";
+import Loader from "../Loader/Loader";
 
 const ManageUsers = () => {
-  const [users, setUsers] = useState([]);
-  console.log(users);
-  const [loading, setLoading] = useState(false);
-  // const [disable, setDisable] = useState(false);
-  const token = localStorage.getItem("access-token");
-  useEffect(() => {
-    setLoading(true);
-    fetch("http://localhost:5000/users", {
-      headers: {
-        authorization: `bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data);
-        setLoading(false);
-      });
-  }, []);
-  //   console.log(users);
+  const [users, refetch, isUsersLoading] = useUser();
+
+  if (isUsersLoading) {
+    return <Loader></Loader>;
+  }
   // make admin ==========
   const handleMakeAdmin = (user) => {
     fetch(`http://localhost:5000/users/admin/${user._id}`, {
@@ -31,12 +17,12 @@ const ManageUsers = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        refetch();
         if (data.modifiedCount) {
           Swal.fire({
             icon: "success",
             title: `${user.name} is admin now`,
           });
-          // setDisable(!disable);
         }
       });
   };
@@ -53,14 +39,10 @@ const ManageUsers = () => {
             icon: "success",
             title: `${user.name} is Instructor now`,
           });
-          // setDisable(!disable);
         }
       });
   };
 
-  if (loading) {
-    return <Loader></Loader>;
-  }
   return (
     <>
       <Helmet>
@@ -84,6 +66,7 @@ const ManageUsers = () => {
                 <th>Email</th>
                 <th>Make Instructor</th>
                 <th>Make Admin</th>
+                <th>Role</th>
               </tr>
             </thead>
             <tbody>
@@ -108,34 +91,41 @@ const ManageUsers = () => {
 
                     <th>
                       {user.role === "instructor" ? (
-                        "instructor"
-                      ) : (
                         <>
-                          {" "}
                           <button
-                            onClick={() => handleInstructor(user)}
-                            className="btn btn-ghost btn-xs"
+                            className="border px-2 py-1 bg-gray-100 rounded-full text-gray-400"
+                            disabled
                           >
-                            Make Instructor
+                            Instructor
                           </button>
                         </>
+                      ) : (
+                        <button
+                          onClick={() => handleInstructor(user)}
+                          className="border px-2 py-1 bg-gray-100 rounded-full text-blue-600"
+                        >
+                          Instructor
+                        </button>
                       )}
                     </th>
                     <th>
-                      {user.role === "admin" ? (
-                        "admin"
+                      {user?.role === "admin" ? (
+                        <button
+                          disabled
+                          className="border px-2 py-1 bg-gray-100 rounded-full text-gray-400"
+                        >
+                          Admin
+                        </button>
                       ) : (
-                        <>
-                          <button
-                            onClick={() => handleMakeAdmin(user)}
-                            // disabled={disable}
-                            className="btn btn-ghost btn-xs"
-                          >
-                            Make Make Admin
-                          </button>
-                        </>
+                        <button
+                          onClick={() => handleMakeAdmin(user)}
+                          className="border px-2 py-1 bg-gray-100 rounded-full text-blue-600"
+                        >
+                          Admin
+                        </button>
                       )}
                     </th>
+                    <th>{user?.role}</th>
                   </tr>
                 ))}
             </tbody>

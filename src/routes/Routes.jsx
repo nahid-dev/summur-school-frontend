@@ -12,6 +12,7 @@ import MySelectedClasses from "../components/MySelectedClasses/MySelectedClasses
 import MyEnrolledClasses from "../components/MyEnrolledClasses/MyEnrolledClasses";
 import Instructor from "../pages/Instractor/Instructor";
 import Classes from "../pages/Classes/Classes";
+import UpdateAClass from "../components/ManageUsers/UpdateAClass/UpdateAClass";
 
 const router = createBrowserRouter([
   {
@@ -45,28 +46,34 @@ const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: "manageClasses",
+        path: "/dashboard/manageClasses",
         element: <ManageClasses></ManageClasses>,
       },
       {
-        path: "manageUsers",
+        path: "/dashboard/manageUsers",
         element: <ManageUsers></ManageUsers>,
       },
       {
-        path: "addAClass",
+        path: "/dashboard/addAClass",
         element: <AddAClass></AddAClass>,
       },
       {
-        path: "myClasses",
+        path: "/dashboard/myClasses",
         element: <MyClasses></MyClasses>,
       },
       {
-        path: "mySelectedClasses",
+        path: "/dashboard/mySelectedClasses",
         element: <MySelectedClasses></MySelectedClasses>,
       },
       {
-        path: "myEnrolledClasses",
+        path: "/dashboard/myEnrolledClasses",
         element: <MyEnrolledClasses></MyEnrolledClasses>,
+      },
+      {
+        path: "/dashboard/updateAClass/:id",
+        element: <UpdateAClass></UpdateAClass>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/classes/${params.id}`),
       },
     ],
   },

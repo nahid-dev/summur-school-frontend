@@ -3,10 +3,22 @@ import { Link, NavLink } from "react-router-dom";
 import Container from "../shared/Container/Container";
 import mainLogo from "../../assets/main-logo.png";
 import { AuthContext } from "../../Providers/AuthProvider";
+import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 
 const Navbar = () => {
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const { user, logOut } = useContext(AuthContext);
 
+  let path;
+  if (isAdmin) {
+    path = "/dashboard/manageClasses";
+  } else if (isInstructor) {
+    path = "/dashboard/addAClass";
+  } else {
+    path = "/dashboard/mySelectedClasses";
+  }
   // User LogOut:
   const handleLogOut = () => {
     logOut()
@@ -45,7 +57,7 @@ const Navbar = () => {
       {user && (
         <>
           <li className="md:me-3 ">
-            <NavLink to="/dashboard">Dashboard</NavLink>
+            <NavLink to={path}>Dashboard</NavLink>
           </li>
         </>
       )}
