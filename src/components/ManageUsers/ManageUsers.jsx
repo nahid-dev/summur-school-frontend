@@ -3,6 +3,7 @@ import SectionTitle from "../SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useUser from "../../Hooks/useUser";
 import Loader from "../Loader/Loader";
+import { Fade } from "react-awesome-reveal";
 
 const ManageUsers = () => {
   const [users, refetch, isUsersLoading] = useUser();
@@ -48,10 +49,12 @@ const ManageUsers = () => {
       <Helmet>
         <title>MyDraw | Manage Users</title>
       </Helmet>
-      <SectionTitle
-        subTitle="All Users here"
-        title="Manage Users"
-      ></SectionTitle>
+      <Fade direction="up">
+        <SectionTitle
+          subTitle="All Users here"
+          title="Manage Users"
+        ></SectionTitle>
+      </Fade>
 
       <div className="w-full px-5">
         <div className="overflow-x-auto">
