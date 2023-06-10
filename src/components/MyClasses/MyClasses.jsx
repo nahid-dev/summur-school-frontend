@@ -46,7 +46,7 @@ const MyClasses = () => {
                   <td>{classItem.status}</td>
                   <td>
                     {classItem?.status === "pending" ||
-                    classItem?.status === "approved"
+                    classItem?.status === "approve"
                       ? "No feedback"
                       : classItem.feedback}
                   </td>

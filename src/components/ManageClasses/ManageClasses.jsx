@@ -5,10 +5,14 @@ import { Fade } from "react-awesome-reveal";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "react-query";
 import { AuthContext } from "../../Providers/AuthProvider";
+import Loader from "../Loader/Loader";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ManageClasses = () => {
   const { loading } = useContext(AuthContext);
   const [axiosSecure] = useAxiosSecure();
+
   const {
     data: classes = [],
     refetch,
@@ -21,6 +25,44 @@ const ManageClasses = () => {
       return res.data;
     },
   });
+  if (classLoading) {
+    return <Loader></Loader>;
+  }
+
+  // handle approve button
+  const handleApprove = (id) => {
+    fetch(`http://localhost:5000/classesApprove/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            icon: "success",
+            title: "Approved the class",
+          });
+        }
+      });
+  };
+
+  // Handle deny button
+  const handleDeny = (id) => {
+    fetch(`http://localhost:5000/classesDeny/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            icon: "success",
+            title: "Deny the class",
+          });
+        }
+      });
+  };
+
   // const classes = [];
   return (
     <>
@@ -50,7 +92,7 @@ const ManageClasses = () => {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody className="space-y-5">
+            <tbody>
               {classes.map((item, index) => (
                 <tr key={item._id} className="">
                   <th>{index + 1}</th>
@@ -85,20 +127,59 @@ const ManageClasses = () => {
                   </td>
                   <td>
                     <span className="flex flex-col space-y-3">
-                      <button className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full">
-                        Approve
-                      </button>
-                      <button className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full">
-                        Deny
-                      </button>
-                      <button className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full">
-                        Send feedback
-                      </button>
+                      {item.status === "approve" || item.status === "deny" ? (
+                        <button
+                          disabled
+                          className=" p-1 bg-blue-400 text-gray-500  duration-300 rounded-full"
+                        >
+                          Approve
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleApprove(item._id)}
+                          className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full"
+                        >
+                          Approve
+                        </button>
+                      )}
+
+                      {item.status === "approve" || item.status === "deny" ? (
+                        <button
+                          disabled
+                          className=" p-1 bg-blue-400 text-gray-500  duration-300 rounded-full"
+                        >
+                          Deny
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleDeny(item._id)}
+                          className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full"
+                        >
+                          Deny
+                        </button>
+                      )}
+
+                      {item.status === "deny" ? (
+                        <Link
+                          to={`/dashboard/feedback/${item._id}`}
+                          className=""
+                        >
+                          <button className=" p-1 bg-blue-600 text-white hover:bg-blue-800 duration-300 rounded-full">
+                            Send feedback
+                          </button>
+                        </Link>
+                      ) : (
+                        <button
+                          disabled
+                          className=" p-1 bg-blue-400 text-gray-500  duration-300 rounded-full"
+                        >
+                          Send feedback
+                        </button>
+                      )}
                     </span>
                   </td>
                 </tr>
               ))}
-              {/* row 1 */}
             </tbody>
           </table>
         </div>

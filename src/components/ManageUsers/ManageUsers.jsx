@@ -36,6 +36,7 @@ const ManageUsers = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
+          refetch();
           Swal.fire({
             icon: "success",
             title: `${user.name} is Instructor now`,

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Container from "../../components/shared/Container/Container";
 import "./signUp.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -12,6 +12,7 @@ const hosted_image_api_key = import.meta.env.VITE_IMG_HOST;
 
 const SignUp = () => {
   const { createUser, updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -63,11 +64,13 @@ const SignUp = () => {
                     .then((res) => res.json())
                     .then((data) => {
                       if (data.insertedId) {
+                        reset();
                         Swal.fire({
                           icon: "success",
                           title: "Sign Up Successfully",
                         });
-                        reset();
+
+                        navigate("/");
                       }
                     });
                 })

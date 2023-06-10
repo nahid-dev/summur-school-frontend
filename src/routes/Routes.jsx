@@ -13,6 +13,7 @@ import MyEnrolledClasses from "../components/MyEnrolledClasses/MyEnrolledClasses
 import Instructor from "../pages/Instractor/Instructor";
 import Classes from "../pages/Classes/Classes";
 import UpdateAClass from "../components/ManageUsers/UpdateAClass/UpdateAClass";
+import Feedback from "../components/Feedback/Feedback";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,12 @@ const router = createBrowserRouter([
         element: <UpdateAClass></UpdateAClass>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/classes/${params.id}`),
+      },
+      {
+        path: "/dashboard/feedback/:id",
+        element: <Feedback></Feedback>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/classesFeedback/${params.id}`),
       },
     ],
   },
