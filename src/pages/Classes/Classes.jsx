@@ -5,10 +5,17 @@ import Loader from "../../components/Loader/Loader";
 import { Fade } from "react-awesome-reveal";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
+import { useContext } from "react";
+import { AuthContext } from "../../Providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Classes = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { data: allClasses = [], isLoading: classLoader } = useQuery({
     queryKey: ["allClasses"],
@@ -21,6 +28,39 @@ const Classes = () => {
     return <Loader></Loader>;
   }
   // console.log(allClasses);
+
+  const handleSelectClass = (singleClass) => {
+    // console.log(singleClass);
+    if (user && user?.email) {
+      const selectedClassItem = {
+        classId: singleClass._id,
+        name: singleClass.name,
+        price: singleClass.price,
+      };
+      fetch("http://localhost:5000/selectedClass", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(selectedClassItem),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            Swal.fire({
+              icon: "success",
+              title: "Selected Successfully",
+            });
+          }
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login First",
+      });
+      navigate("/login", { state: { from: location } });
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -74,7 +114,10 @@ const Classes = () => {
                           Select Class
                         </button>
                       ) : (
-                        <button className="main-btn cursor-pointer">
+                        <button
+                          onClick={() => handleSelectClass(singleClass)}
+                          className="main-btn cursor-pointer"
+                        >
                           Select Class
                         </button>
                       )}
