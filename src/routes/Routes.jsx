@@ -14,6 +14,7 @@ import Instructor from "../pages/Instractor/Instructor";
 import Classes from "../pages/Classes/Classes";
 import UpdateAClass from "../components/ManageUsers/UpdateAClass/UpdateAClass";
 import Feedback from "../components/Feedback/Feedback";
+import Payment from "../components/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,12 @@ const router = createBrowserRouter([
         element: <Feedback></Feedback>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/classesFeedback/${params.id}`),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment></Payment>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/classPayment/${params.id}`),
       },
     ],
   },

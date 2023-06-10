@@ -36,6 +36,8 @@ const Classes = () => {
         classId: singleClass._id,
         name: singleClass.name,
         price: singleClass.price,
+        image: singleClass.image,
+        email: user?.email,
       };
       fetch("http://localhost:5000/selectedClass", {
         method: "POST",
