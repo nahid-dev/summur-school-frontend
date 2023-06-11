@@ -16,6 +16,7 @@ import UpdateAClass from "../components/ManageUsers/UpdateAClass/UpdateAClass";
 import Feedback from "../components/Feedback/Feedback";
 import Payment from "../components/Payment/Payment";
 import PrivetRoutes from "./PrivetRoutes";
+import PaymentHistory from "../components/PaymentHistory/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
         element: <Payment></Payment>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/classPayment/${params.id}`),
+      },
+      {
+        path: "/dashboard/paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
       },
     ],
   },

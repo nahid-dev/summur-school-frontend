@@ -13,7 +13,7 @@ const Feedback = () => {
 
   //   const { register, handleSubmit } = useForm();
 
-  console.log(feedbackClass);
+  // console.log(feedbackClass);
 
   const handleFeedback = (e) => {
     e.preventDefault();

@@ -3,7 +3,7 @@ import "./dashboard.css";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { MdManageAccounts, MdPayment } from "react-icons/md";
-import { FaUsers, FaRegHandPointRight } from "react-icons/fa";
+import { FaUsers, FaRegHandPointRight, FaHistory } from "react-icons/fa";
 
 import { AiFillHome } from "react-icons/ai";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -75,6 +75,15 @@ const Dashboard = () => {
                   >
                     <MdPayment size={32}></MdPayment>
                     My Enrolled Classes
+                  </NavLink>
+                </li>
+                <li className="">
+                  <NavLink
+                    to="/dashboard/paymentHistory"
+                    className="second-btn"
+                  >
+                    <FaHistory size={32}></FaHistory>
+                    Payment History
                   </NavLink>
                 </li>
               </div>

@@ -7,7 +7,7 @@ import Loader from "../Loader/Loader";
 
 const MyEnrolledClasses = () => {
   const [enrolledClasses, , enrolledLoading] = useEnrolledClasses();
-  console.log(enrolledClasses);
+  // console.log(enrolledClasses);
   if (enrolledLoading) {
     return <Loader></Loader>;
   }
