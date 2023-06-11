@@ -15,6 +15,7 @@ import Classes from "../pages/Classes/Classes";
 import UpdateAClass from "../components/ManageUsers/UpdateAClass/UpdateAClass";
 import Feedback from "../components/Feedback/Feedback";
 import Payment from "../components/Payment/Payment";
+import PrivetRoutes from "./PrivetRoutes";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivetRoutes>
+        <Dashboard></Dashboard>
+      </PrivetRoutes>
+    ),
     children: [
       {
         path: "/dashboard/manageClasses",

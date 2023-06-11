@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import Container from "../../components/shared/Container/Container";
 import "./login.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { AuthContext } from "../../Providers/AuthProvider";
@@ -11,8 +11,10 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
-  const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
@@ -31,7 +33,7 @@ const Login = () => {
           title: "Successfully Login",
         });
         reset();
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err.message);
