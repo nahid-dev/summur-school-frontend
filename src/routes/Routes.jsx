@@ -17,10 +17,12 @@ import Feedback from "../components/Feedback/Feedback";
 import Payment from "../components/Payment/Payment";
 import PrivetRoutes from "./PrivetRoutes";
 import PaymentHistory from "../components/PaymentHistory/PaymentHistory";
+import ErrorPage from "../pages/Errorpage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage></ErrorPage>,
     element: <Main></Main>,
     children: [
       {
