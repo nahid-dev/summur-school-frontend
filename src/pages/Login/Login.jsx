@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "../../components/shared/Container/Container";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,10 +7,12 @@ import SocialLogin from "../../components/shared/SocialLogin/SocialLogin";
 import { AuthContext } from "../../Providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const {
     register,
     handleSubmit,
@@ -35,6 +37,10 @@ const Login = () => {
         console.log(err.message);
       });
   };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   return (
     <>
       <Helmet>
@@ -57,11 +63,11 @@ const Login = () => {
                     <span className="text-red-600">Email is required</span>
                   )}
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col relative">
                   <label className="font-bold">Password</label>
                   <input
                     className="border px-3 py-2 my-2 w-full border-blue-600 rounded-md"
-                    type="password"
+                    type={passwordVisible ? "text" : "password"}
                     placeholder="Enter your Password"
                     {...register("password", {
                       required: true,
@@ -70,6 +76,16 @@ const Login = () => {
                   {errors.password?.type === "required" && (
                     <p className="text-red-600">Password is required</p>
                   )}
+                  <button
+                    onClick={togglePasswordVisibility}
+                    className="absolute top-10 right-5"
+                  >
+                    {passwordVisible ? (
+                      <AiFillEyeInvisible size={22}></AiFillEyeInvisible>
+                    ) : (
+                      <AiFillEye size={22}></AiFillEye>
+                    )}
+                  </button>
                 </div>
 
                 <div className="flex flex-col mt-3">
