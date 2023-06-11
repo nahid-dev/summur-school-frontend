@@ -28,7 +28,7 @@ const MyEnrolledClasses = () => {
         <div className="overflow-x-auto">
           <table className="md:table table-sm table-zebra">
             {/* head */}
-            <thead>
+            <thead className="bg-gray-200">
               <tr>
                 <th>#</th>
                 <th>Class Image</th>
