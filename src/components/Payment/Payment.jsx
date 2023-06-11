@@ -12,6 +12,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GETWAY);
 
 const Payment = () => {
   const paymentClass = useLoaderData();
+  const { price } = paymentClass;
+  // console.log(price);
   console.log(paymentClass);
   return (
     <>
@@ -26,9 +28,9 @@ const Payment = () => {
           ></SectionTitle>
         </Fade>
       </div>
-      <div className="w-full text-center px-2 md:px-10">
+      <div className="w-full px-2 md:px-10">
         <Elements stripe={stripePromise}>
-          <CheckOutForm />
+          <CheckOutForm price={price} paymentClass={paymentClass} />
         </Elements>
       </div>
     </>
