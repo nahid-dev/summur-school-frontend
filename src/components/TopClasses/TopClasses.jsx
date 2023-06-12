@@ -22,7 +22,7 @@ const TopClasses = () => {
       <Container>
         <div className="">
           <div className="mx-auto">
-            <div className="mx-auto max-w-2xl py-10 sm:py-24 lg:max-w-none lg:py-14">
+            <div className="mx-auto max-w-2xl py-10 sm:py-24 lg:max-w-none lg:py-14 lg:pt-0">
               <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
                 {topClasses.map((item) => (
                   <Fade key={item._id}>

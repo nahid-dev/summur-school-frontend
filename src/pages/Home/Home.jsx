@@ -5,6 +5,7 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 import TopClasses from "../../components/TopClasses/TopClasses";
 import PreviewClass from "../../components/PreviewClass/PreviewClass";
+import TopInstructor from "../../components/TopInstructor/TopInstructor";
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
       ></SectionTitle>
       <TopClasses></TopClasses>
       <PreviewClass></PreviewClass>
+      <TopInstructor></TopInstructor>
     </>
   );
 };

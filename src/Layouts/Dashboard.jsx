@@ -3,7 +3,12 @@ import "./dashboard.css";
 import { AuthContext } from "../Providers/AuthProvider";
 import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { MdManageAccounts, MdPayment } from "react-icons/md";
-import { FaUsers, FaRegHandPointRight, FaHistory } from "react-icons/fa";
+import {
+  FaUsers,
+  FaRegHandPointRight,
+  FaHistory,
+  FaBars,
+} from "react-icons/fa";
 
 import { AiFillHome } from "react-icons/ai";
 import { BsPlusCircleFill } from "react-icons/bs";
@@ -38,9 +43,9 @@ const Dashboard = () => {
           <Outlet></Outlet>
           <label
             htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden"
+            className="btn  drawer-button lg:hidden absolute top-14 left-5"
           >
-            Open drawer
+            <FaBars size={28}></FaBars>
           </label>
         </div>
         <div className="drawer-side">
