@@ -91,7 +91,7 @@ const PreviewClass = () => {
 
                   <Fade direction="left">
                     <a href="#" className="main-btn">
-                      Shop Collection
+                      Class Rooms
                     </a>
                   </Fade>
                 </div>
