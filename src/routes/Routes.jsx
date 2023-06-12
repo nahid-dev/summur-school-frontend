@@ -83,19 +83,25 @@ const router = createBrowserRouter([
         path: "/dashboard/updateAClass/:id",
         element: <UpdateAClass></UpdateAClass>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/classes/${params.id}`),
+          fetch(
+            `https://summer-camp-server-nahid-dev.vercel.app/classes/${params.id}`
+          ),
       },
       {
         path: "/dashboard/feedback/:id",
         element: <Feedback></Feedback>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/classesFeedback/${params.id}`),
+          fetch(
+            `https://summer-camp-server-nahid-dev.vercel.app/classesFeedback/${params.id}`
+          ),
       },
       {
         path: "/dashboard/payment/:id",
         element: <Payment></Payment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/classPayment/${params.id}`),
+          fetch(
+            `https://summer-camp-server-nahid-dev.vercel.app/classPayment/${params.id}`
+          ),
       },
       {
         path: "/dashboard/paymentHistory",

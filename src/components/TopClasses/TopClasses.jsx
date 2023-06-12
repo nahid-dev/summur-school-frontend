@@ -8,7 +8,9 @@ const TopClasses = () => {
   const { data: topClasses = [], isLoading: loading } = useQuery({
     queryKey: ["topClasses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/topClasses");
+      const res = await fetch(
+        "https://summer-camp-server-nahid-dev.vercel.app/topClasses"
+      );
       return res.json();
     },
   });
@@ -24,7 +26,7 @@ const TopClasses = () => {
           <div className="mx-auto">
             <div className="mx-auto max-w-2xl py-10 sm:py-24 lg:max-w-none lg:py-14 lg:pt-0">
               <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                {topClasses.map((item) => (
+                {topClasses.slice(0, 6).map((item) => (
                   <Fade key={item._id}>
                     <div className="group relative md:m-7">
                       <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:scale-105 duration-300 sm:h-64">

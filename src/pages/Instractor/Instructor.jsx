@@ -10,7 +10,9 @@ const Instructor = () => {
     {
       queryKey: ["allClasses"],
       queryFn: async () => {
-        const res = await fetch("http://localhost:5000/allInstructor");
+        const res = await fetch(
+          "https://summer-camp-server-nahid-dev.vercel.app/allInstructor"
+        );
         return res.json();
       },
     }

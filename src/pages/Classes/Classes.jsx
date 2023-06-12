@@ -20,7 +20,9 @@ const Classes = () => {
   const { data: allClasses = [], isLoading: classLoader } = useQuery({
     queryKey: ["allClasses"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allClasses");
+      const res = await fetch(
+        "https://summer-camp-server-nahid-dev.vercel.app/allClasses"
+      );
       return res.json();
     },
   });
@@ -39,7 +41,7 @@ const Classes = () => {
         image: singleClass.image,
         email: user?.email,
       };
-      fetch("http://localhost:5000/selectedClass", {
+      fetch("https://summer-camp-server-nahid-dev.vercel.app/selectedClass", {
         method: "POST",
         headers: {
           "content-type": "application/json",

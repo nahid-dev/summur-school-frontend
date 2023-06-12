@@ -22,13 +22,16 @@ const Feedback = () => {
       feedback,
     };
     console.log(feedback);
-    fetch(`http://localhost:5000/classFeedback/${feedbackClass._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(feedbackText),
-    })
+    fetch(
+      `https://summer-camp-server-nahid-dev.vercel.app/classFeedback/${feedbackClass._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(feedbackText),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {

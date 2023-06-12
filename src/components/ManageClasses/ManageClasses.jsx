@@ -31,9 +31,12 @@ const ManageClasses = () => {
 
   // handle approve button
   const handleApprove = (id) => {
-    fetch(`http://localhost:5000/classesApprove/${id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://summer-camp-server-nahid-dev.vercel.app/classesApprove/${id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -48,7 +51,7 @@ const ManageClasses = () => {
 
   // Handle deny button
   const handleDeny = (id) => {
-    fetch(`http://localhost:5000/classesDeny/${id}`, {
+    fetch(`https://summer-camp-server-nahid-dev.vercel.app/classesDeny/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
