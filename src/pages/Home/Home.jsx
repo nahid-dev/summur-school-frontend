@@ -4,6 +4,7 @@ import Slider from "../../components/Slider/Slider";
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import { Helmet } from "react-helmet-async";
 import TopClasses from "../../components/TopClasses/TopClasses";
+import PreviewClass from "../../components/PreviewClass/PreviewClass";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
         title="Our Popular Classes"
       ></SectionTitle>
       <TopClasses></TopClasses>
+      <PreviewClass></PreviewClass>
     </>
   );
 };
