@@ -27,3 +27,8 @@
 # Live site Link:
 
 - https://summer-camp-client-1dc2e.web.app/
+
+# Admin info:
+
+- email: russel@mail.com
+  -pass: Russel@123
