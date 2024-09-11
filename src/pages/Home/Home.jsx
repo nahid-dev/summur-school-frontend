@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 import TopClasses from "../../components/TopClasses/TopClasses";
 import PreviewClass from "../../components/PreviewClass/PreviewClass";
 import TopInstructor from "../../components/TopInstructor/TopInstructor";
+import Gallery from "../../components/Gallery/Gallery";
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
       <TopClasses></TopClasses>
       <PreviewClass></PreviewClass>
       <TopInstructor></TopInstructor>
+      <Gallery></Gallery>
     </>
   );
 };
